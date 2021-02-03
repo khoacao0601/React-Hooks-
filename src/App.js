@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import './App.css';
 import TodoList from './components/TodoList';
 import TodoFrom from './components/TodoForm';
+import Menu from './components/MyOwnPractice/index ';
+import PostList from './components/PostList';
 
 function App() {
   const [todoList, setTodoList] = useState([
@@ -10,6 +12,10 @@ function App() {
       { id: 2, title: 'We love Easy Frontend! 🥰 ' },
       { id: 3, title: 'They love Easy Frontend! 🚀 ' },
   ]);
+
+  const view = {
+    viewNow: "home",
+  };
 
   function handleTodoClick(todo) {
     const index = todoList.findIndex(x => x.id === todo.id);
@@ -29,14 +35,21 @@ function App() {
     newTodoList.push(newTodo);
   }
 
+  function handleChangeView(viewValue) {
+    console.log(viewValue);
+  }
+
   return (
     <div className="App">
       <h1>Welcome to react hooks</h1>
       <ColorBox />
       <TodoList todos={todoList} onTodoClick={handleTodoClick}/>
       <TodoFrom onSubmit={handleTodoFormSubmit} />
+      <Menu view={view} changeView={handleChangeView}/>
+      <PostList/>
     </div>
   );
+  
 }
 
 export default App;
