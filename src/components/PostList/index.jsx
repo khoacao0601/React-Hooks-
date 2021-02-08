@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 PostList.propTypes = {
     posts: PropTypes.array,
+    pageInfos: PropTypes.func,
 };
 
 PostList.defaultProps = {
@@ -12,9 +13,11 @@ PostList.defaultProps = {
 
 
 function PostList(props) {
-    const { posts } = props;
 
     const [postList, setPostList ] = useState([]);
+    const [pagination, setPagination ] = useState({});
+    const { pageInfos } = props.pageInfos;
+    console.log(pageInfos);
 
     useEffect(() => {
         async function fetchPostList(){
@@ -23,8 +26,9 @@ function PostList(props) {
                 const response = await fetch(requestUrl);
                 const responseJSON = await response.json();
 
-                const {data} = responseJSON;
+                const {data, pagination} = responseJSON;
                 setPostList(data);
+                setPagination(pagination);
             } catch (error) {
                 console.log('Failed to Fetch');
             } 
@@ -34,10 +38,8 @@ function PostList(props) {
     }, [ ]);
 
     return (
-        <ul className="post-list">
-            {postList.map(post => (
-                <li key={post.id}>{post.title}</li>
-            ))}
+        <ul className="post-list" pageInfos={pagination}>
+            {postList.map(post => (<li key={post.id}>{post.title}</li>))}
         </ul>
     );
 }
