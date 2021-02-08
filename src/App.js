@@ -5,6 +5,7 @@ import TodoList from './components/TodoList';
 import TodoFrom from './components/TodoForm';
 import Menu from './components/MyOwnPractice/index ';
 import PostList from './components/PostList';
+import Pagination from './components/Pagination';
 
 function App() {
   const [todoList, setTodoList] = useState([
@@ -16,6 +17,7 @@ function App() {
   const view = {
     viewNow: "home",
   };
+
 
   function handleTodoClick(todo) {
     const index = todoList.findIndex(x => x.id === todo.id);
@@ -39,6 +41,12 @@ function App() {
     console.log(viewValue);
   }
 
+  function handlePages(pageInfo){
+    console.log(pageInfo);
+  }
+
+
+
   return (
     <div className="App">
       <h1>Welcome to react hooks</h1>
@@ -46,7 +54,7 @@ function App() {
       <TodoList todos={todoList} onTodoClick={handleTodoClick}/>
       <TodoFrom onSubmit={handleTodoFormSubmit} />
       <Menu view={view} changeView={handleChangeView}/>
-      <PostList/>
+      <PostList pageInfos={handlePages}/>
     </div>
   );
   
