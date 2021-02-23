@@ -1,11 +1,3 @@
-import ColorBox from './components/ColorBox';
-import React, { useState } from 'react';
-import './App.css';
-import TodoList from './components/TodoList';
-import TodoFrom from './components/TodoForm';
-import Menu from './components/MyOwnPractice/index ';
-import PostList from './components/PostList';
-import Pagination from './components/Pagination';
 
 function App() {
   const [todoList, setTodoList] = useState([
